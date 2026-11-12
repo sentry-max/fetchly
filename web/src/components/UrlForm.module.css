@@ -1,0 +1,126 @@
+.form {
+  display: grid;
+  gap: 8px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.row {
+  display: flex;
+  gap: 8px;
+}
+
+.field {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-inline-size: 0;
+  /* URLs are always left-to-right, including inside the Persian layout. */
+  direction: ltr;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-medium);
+  transition:
+    border-color 120ms ease,
+    box-shadow 120ms ease;
+}
+
+.field:hover {
+  border-color: var(--color-text-subtle);
+}
+
+.field:focus-within {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+}
+
+.field[data-invalid="true"] {
+  border-color: var(--color-danger);
+}
+
+.field[data-invalid="true"]:focus-within {
+  box-shadow: 0 0 0 3px var(--color-danger-ring);
+}
+
+.fieldIcon {
+  flex: none;
+  margin-left: 12px;
+  color: var(--color-text-subtle);
+}
+
+.input {
+  flex: 1;
+  min-inline-size: 0;
+  block-size: 44px;
+  padding: 0 12px 0 10px;
+  border: 0;
+  background: transparent;
+  color: var(--color-text);
+  font-family: var(--font-latin);
+  font-size: 15px;
+  outline: none;
+}
+
+.input::placeholder {
+  color: var(--color-text-subtle);
+}
+
+.input:disabled {
+  cursor: not-allowed;
+  color: var(--color-text-muted);
+}
+
+.pasteButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+  block-size: 32px;
+  margin-right: 6px;
+  padding: 0 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-small);
+  background: var(--color-surface-muted);
+  color: var(--color-text-muted);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.pasteButton:hover:not(:disabled) {
+  color: var(--color-text);
+  border-color: var(--color-border-strong);
+}
+
+:global(html[dir="rtl"]) .pasteButton {
+  font-family: var(--font-persian);
+}
+
+.hint,
+.error {
+  margin: 0;
+  font-size: 13px;
+}
+
+.hint {
+  color: var(--color-text-muted);
+}
+
+.error {
+  color: var(--color-danger);
+}
+
+@media (max-width: 560px) {
+  .row {
+    flex-direction: column;
+  }
+
+  .row > :global(.button) {
+    inline-size: 100%;
+  }
+}

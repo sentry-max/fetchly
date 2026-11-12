@@ -1,0 +1,37 @@
+.notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-medium);
+  background: var(--color-surface-muted);
+  color: var(--color-text);
+}
+
+.notice[data-tone="error"] {
+  border-color: var(--color-danger-border);
+  background: var(--color-danger-soft);
+}
+
+.icon {
+  flex: none;
+  margin-block-start: 2px;
+  color: var(--color-text-muted);
+}
+
+.notice[data-tone="error"] .icon {
+  color: var(--color-danger);
+}
+
+.message {
+  flex: 1;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.action {
+  flex: none;
+  margin-block: -4px;
+}

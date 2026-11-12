@@ -1,0 +1,169 @@
+.idle {
+  display: grid;
+  gap: 12px;
+}
+
+.downloadButton {
+  inline-size: 100%;
+}
+
+.progress {
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-medium);
+  background: var(--color-surface-muted);
+}
+
+.progressHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.status {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.percent {
+  font-size: 14px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.track {
+  position: relative;
+  block-size: 6px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--color-track);
+}
+
+.fill {
+  block-size: 100%;
+  border-radius: inherit;
+  background: var(--color-accent);
+  transition: width 400ms ease;
+}
+
+.fill[data-indeterminate="true"] {
+  inline-size: 35%;
+  animation: indeterminate 1.4s ease-in-out infinite;
+}
+
+:global(html[dir="rtl"]) .fill[data-indeterminate="true"] {
+  animation-name: indeterminate-rtl;
+}
+
+@keyframes indeterminate {
+  from {
+    transform: translateX(-110%);
+  }
+  to {
+    transform: translateX(310%);
+  }
+}
+
+@keyframes indeterminate-rtl {
+  from {
+    transform: translateX(110%);
+  }
+  to {
+    transform: translateX(-310%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fill[data-indeterminate="true"] {
+    inline-size: 100%;
+    opacity: 0.45;
+    animation: none;
+  }
+}
+
+.progressFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-block-size: 32px;
+}
+
+.details {
+  color: var(--color-text-muted);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.completed {
+  display: grid;
+  gap: 8px;
+  padding: 16px;
+  border: 1px solid var(--color-success-border);
+  border-radius: var(--radius-medium);
+  background: var(--color-success-soft);
+}
+
+.completedHeading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.completedHeading h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.successIcon {
+  color: var(--color-success);
+}
+
+.completedDescription {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 14px;
+}
+
+.fileRow {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 0;
+  font-size: 13px;
+}
+
+.fileName {
+  min-inline-size: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fileSize {
+  flex: none;
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.fileSize::before {
+  content: "·";
+  margin-inline-end: 8px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-block-start: 6px;
+}
+
+@media (max-width: 480px) {
+  .actions > * {
+    flex: 1 1 100%;
+  }
+}

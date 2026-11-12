@@ -1,0 +1,32 @@
+.footer {
+  margin-block-start: auto;
+  border-block-start: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 24px;
+  padding-block: 20px;
+  color: var(--color-text-muted);
+  font-size: 13px;
+}
+
+.copyright,
+.notice {
+  margin: 0;
+}
+
+.notice {
+  max-inline-size: 520px;
+  text-align: end;
+}
+
+@media (max-width: 720px) {
+  .notice {
+    text-align: start;
+  }
+}

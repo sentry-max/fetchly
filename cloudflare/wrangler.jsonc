@@ -1,0 +1,57 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "fetchly",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-11-01",
+  "observability": {
+    "enabled": true,
+  },
+
+  // The interface is served from Cloudflare's edge; only /api/* wakes the container.
+  "assets": {
+    "directory": "../web/dist",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*"],
+  },
+
+  "containers": [
+    {
+      "class_name": "DownloaderContainer",
+      "image": "../Dockerfile",
+      "image_build_context": "..",
+      // 1/2 vCPU, 4 GiB memory, 8 GB disk. Use standard-2 or higher for frequent 4K downloads.
+      "instance_type": "standard-1",
+      "max_instances": 1,
+    },
+  ],
+
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "DOWNLOADER",
+        "class_name": "DownloaderContainer",
+      },
+    ],
+  },
+
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["DownloaderContainer"],
+    },
+  ],
+
+  // Passed through to the container. Secrets (YTDLP_COOKIES_BASE64, YTDLP_PROXY)
+  // are set with `npx wrangler secret put <NAME>` and forwarded the same way.
+  "vars": {
+    "LOG_LEVEL": "info",
+    "MAX_CONCURRENT_DOWNLOADS": "2",
+    "MAX_QUEUED_DOWNLOADS": "20",
+    "MAX_ACTIVE_DOWNLOADS_PER_CLIENT": "2",
+    "MAX_VIDEO_DURATION_MINUTES": "180",
+    "FILE_RETENTION_MINUTES": "30",
+    "INSPECT_REQUESTS_PER_HOUR": "120",
+    "DOWNLOAD_REQUESTS_PER_HOUR": "30",
+    "YTDLP_AUTO_UPDATE": "true",
+  },
+}

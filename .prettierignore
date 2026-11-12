@@ -1,0 +1,4 @@
+dist
+.wrangler
+package-lock.json
+cloudflare/node_modules
